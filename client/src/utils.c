@@ -24,13 +24,16 @@ int crear_conexion(char *ip, char* puerto)
 	memset(&hints, 0, sizeof(hints));
 	hints.ai_family = AF_INET;
 	hints.ai_socktype = SOCK_STREAM;
-	hints.ai_flags = AI_PASSIVE;
+	hints.ai_flags = AI_PASSIVE; //sacar parametro(?)
 
 	getaddrinfo(ip, puerto, &hints, &server_info);
 
 	// Ahora vamos a crear el socket.
 	int socket_cliente = 0;
 
+	int fd_conexion = socket(server_info->ai_family,
+                         server_info->ai_socktype,
+                         server_info->ai_protocol);
 	// Ahora que tenemos el socket, vamos a conectarlo
 
 
